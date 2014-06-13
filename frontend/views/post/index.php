@@ -9,7 +9,7 @@ use yii\helpers\Html;
 $this->title = "記事一覧";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1>記事一覧</h1>
+<h1><i class="fa fa-list"></i> 記事一覧</h1>
 
 <?php $this->beginBlock('posts-table'); ?>
 <table class="table">
@@ -32,7 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
     'itemView' => function(Post $model) {
         ob_start(); ?>
         <tr>
-            <td><?= Html::a(Html::encode($model->title), ['view', 'id' => $model->id]); ?></td>
+            <td><?= Html::a(
+                '<i class="fa fa-file-o"></i> ' . Html::encode($model->title),
+                ['view', 'id' => $model->id]
+            ); ?></td>
             <td><span class="label label-default"><?= Html::encode($model->category->name); ?></span></td>
             <td><?= Html::encode(Yii::$app->formatter->asDatetime($model->created_at)); ?></td>
             <td><?= Html::encode(Yii::$app->formatter->asDatetime($model->updated_at)); ?></td>

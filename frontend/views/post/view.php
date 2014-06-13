@@ -10,7 +10,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => '記事一覧', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($model->title) ?></h1>
+<h1><i class="fa fa-file-o"></i> <?= Html::encode($model->title) ?></h1>
 <div><span class="label label-default"><?= Html::encode($model->category->name); ?></span></div>
 <p>
     <?= nl2br(Html::encode($model->body)) ?>
