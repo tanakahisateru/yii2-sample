@@ -6,7 +6,6 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Post;
-use yii\db\ActiveQuery;
 
 /**
  * PostSearch represents the model behind the search form about `common\models\Post`.
@@ -31,9 +30,7 @@ class PostSearch extends Post
 
     public function search($params)
     {
-        $query = Post::find()->joinWith(['category' => function(ActiveQuery $q){
-            $q->orderBy(['sort' => SORT_ASC]);
-        }]);
+        $query = Post::find()->joinWith(['category']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -44,6 +41,7 @@ class PostSearch extends Post
             'desc' => ['category.sort' => SORT_DESC],
             'default' => SORT_ASC,
         ];
+        $dataProvider->sort->defaultOrder = ['created_at' => SORT_DESC];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
