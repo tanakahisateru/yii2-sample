@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'itemView' => function(Post $model) {
         ob_start(); ?>
         <tr>
-            <td><?= Html::encode($model->title); ?></td>
+            <td><?= Html::a(Html::encode($model->title), ['view', 'id' => $model->id]); ?></td>
             <td><span class="label label-default"><?= Html::encode($model->category->name); ?></span></td>
             <td><?= Html::encode(Yii::$app->formatter->asDatetime($model->created_at)); ?></td>
             <td><?= Html::encode(Yii::$app->formatter->asDatetime($model->updated_at)); ?></td>

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Post;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 class PostController extends \yii\web\Controller
 {
@@ -21,4 +22,15 @@ class PostController extends \yii\web\Controller
         ]);
     }
 
+    public function actionView($id)
+    {
+        $model = Post::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
 }
