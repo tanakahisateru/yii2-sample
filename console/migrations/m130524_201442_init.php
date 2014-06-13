@@ -24,6 +24,13 @@ class m130524_201442_init extends \yii\db\Migration
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
+
+        $admin = new \common\models\User();
+        $admin->username = 'admin';
+        $admin->password = 'admin';
+        $admin->email = Yii::$app->params['adminEmail'];
+        $admin->auth_key = '';
+        $admin->save();
     }
 
     public function down()
