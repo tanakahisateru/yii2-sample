@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Post;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -29,7 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'category.name',
+            [
+                'attribute' => 'category_name',
+                'value' => function(Post $row) {
+                    return $row->category->name;
+                },
+            ],
             'created_at:datetime',
             'updated_at:datetime',
 

@@ -33,7 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'body:ntext',
-            'category.name',
+            [
+                'attribute' => 'category_name',
+                'value' => $model->category->name,
+            ],
             'created_at:datetime',
             'updated_at:datetime',
         ],
