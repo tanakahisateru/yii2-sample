@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "post".
@@ -17,7 +20,7 @@ use Yii;
  * @property Comment[] $comments
  * @property Category $category
  */
-class Post extends \yii\db\ActiveRecord
+class Post extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -27,15 +30,29 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+                ],
+                'value' => function(){ return time(); },
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['title', 'body', 'category_id', 'created_at', 'updated_at'], 'required'],
+            [['title', 'body', 'category_id'], 'required'],
             [['body'], 'string'],
-            [['category_id', 'created_at', 'updated_at'], 'integer'],
+            [['category_id'], 'integer'],
             [['title'], 'string', 'max' => 255]
         ];
     }
