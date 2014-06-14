@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="commnt-form">
         <?php $form = ActiveForm::begin(['action' => ['comment']]); ?>
-        <?= $form->field($commentFormModel, 'post_id')->hiddenInput() ?>
+        <?= $form->field($commentFormModel, 'post_id')->hiddenInput()->label(false) ?>
         <?= $form->field($commentFormModel, 'body')->textarea() ?>
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
