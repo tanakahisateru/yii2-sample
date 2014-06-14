@@ -34,9 +34,9 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Category', 'url' => ['/category/index']],
-                ['label' => 'Post', 'url' => ['/post/index']],
-                ['label' => 'Comment', 'url' => ['/comment/index']],
+                ['label' => 'Category', 'url' => ['/category/index'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'Post', 'url' => ['/post/index'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'Comment', 'url' => ['/comment/index'], 'visible' => !Yii::$app->user->isGuest],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
