@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             [
-                'attribute' => 'post.title',
+                'attribute' => 'post_title',
                 'format' => 'raw',
                 'value' => function(Comment $model) {
                     return Html::a(Html::encode($model->post->title), ['post/view', 'id' => $model->post_id]);
