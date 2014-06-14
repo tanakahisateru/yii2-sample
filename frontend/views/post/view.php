@@ -2,8 +2,10 @@
 /**
  * @var yii\web\View $this
  * @var Post $model
+ * @var \frontend\models\CommentForm $commentFormModel
  */
 use common\models\Post;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 $this->title = $model->title;
@@ -17,3 +19,17 @@ $this->params['breadcrumbs'][] = $this->title;
 </p>
 <div>作成日時 <?= Html::encode(Yii::$app->formatter->asDatetime($model->created_at)) ?></div>
 <div>更新日時 <?= Html::encode(Yii::$app->formatter->asDatetime($model->updated_at)) ?></div>
+
+<div class="comments">
+    <h2>コメント</h2>
+    <div class="commnt-form">
+        <?php $form = ActiveForm::begin(['action' => ['comment']]); ?>
+        <?= $form->field($commentFormModel, 'post_id')->hiddenInput() ?>
+        <?= $form->field($commentFormModel, 'body')->textarea() ?>
+        <div class="form-group">
+            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div>
+</div>
+
