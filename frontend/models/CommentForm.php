@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use common\models\Comment;
 use yii\base\Model;
 use Yii;
 
@@ -30,6 +31,13 @@ class CommentForm extends Model
         if (!$this->validate()) {
             return false;
         }
+
+        $model = new Comment();
+        $model->setAttributes([
+            'post_id' => $this->post_id,
+            'body' => $this->body,
+        ]);
+        $model->save(false); // バリデーションはこのフォームで済んでいる
 
         return true;
     }
