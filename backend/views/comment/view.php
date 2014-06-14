@@ -31,10 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'post_id',
+            [
+                'attribute' => 'post.title',
+                'format' => 'raw',
+                'value' => Html::a(Html::encode($model->post->title), ['post/view', 'id' => $model->post_id])
+            ],
             'body:ntext',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 
